@@ -36,6 +36,8 @@ class AppAuthController extends ResourceController {
       ));
     }
 
+    final salt = generateRandomSalt();
+    final hashPassword = generatePasswordHash(user.password ??"", salt);
     final User fetchedUser = User();
 
     return Response.ok(ResponseModelAuth(
