@@ -1,6 +1,7 @@
 import 'package:auth_dart/models/response_model.dart';
 import 'package:auth_dart/models/user.dart';
 import 'package:conduit/conduit.dart';
+import 'package:conduit_core/conduit_core.dart';
 
 class AppAuthController extends ResourceController {
   final ManagedContext managedContext;
@@ -10,14 +11,14 @@ class AppAuthController extends ResourceController {
   @Operation.post()
   Future<Response> signIn(@Bind.body() User user) async {
     if (user.password == null || user.username == null) {
-      return Response.badRequest(body: ResponseModel(
+      return Response.badRequest(body: ResponseModelAuth(
         message: "Fields password and username is required"
       ));
     }
 
     final User fetchedUser = User();
 
-    return Response.ok(ResponseModel(
+    return Response.ok(ResponseModelAuth(
       data: {
         "id":fetchedUser.id,
         "refreshToken": fetchedUser.refreshToken,
@@ -30,14 +31,14 @@ class AppAuthController extends ResourceController {
   @Operation.put()
   Future<Response> signUp(@Bind.body() User user) async {
     if (user.password == null || user.username == null || user.email == null) {
-      return Response.badRequest(body: ResponseModel(
+      return Response.badRequest(body: ResponseModelAuth(
           message: "Fields password and username, email is required"
       ));
     }
 
     final User fetchedUser = User();
 
-    return Response.ok(ResponseModel(
+    return Response.ok(ResponseModelAuth(
         data: {
           "id":fetchedUser.id,
           "refreshToken": fetchedUser.refreshToken,
@@ -51,7 +52,7 @@ class AppAuthController extends ResourceController {
   Future<Response> refreshToken(@Bind.path("refresh") String refreshToken) async {
     final User fetchedUser = User();
 
-    return Response.ok(ResponseModel(
+    return Response.ok(ResponseModelAuth(
         data: {
           "id":fetchedUser.id,
           "refreshToken": fetchedUser.refreshToken,
