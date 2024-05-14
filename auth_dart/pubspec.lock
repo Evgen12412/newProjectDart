@@ -5,18 +5,23 @@ packages:
     dependency: transitive
     description:
       name: _fe_analyzer_shared
-      sha256: ae92f5d747aee634b87f89d9946000c2de774be1d6ac3e58268224348cd0101a
+      sha256: "5aaf60d96c4cd00fe7f21594b5ad6a1b699c80a27420f8a837f4d68473ef09e3"
       url: "https://pub.dev"
     source: hosted
-    version: "61.0.0"
+    version: "68.0.0"
+  _macros:
+    dependency: transitive
+    description: dart
+    source: sdk
+    version: "0.1.0"
   analyzer:
     dependency: transitive
     description:
       name: analyzer
-      sha256: ea3d8652bda62982addfd92fdc2d0214e5f82e43325104990d4f4c4a2a313562
+      sha256: "21f1d3720fd1c70316399d5e2bccaebb415c434592d778cce8acb967b8578808"
       url: "https://pub.dev"
     source: hosted
-    version: "5.13.0"
+    version: "6.5.0"
   args:
     dependency: "direct main"
     description:
@@ -33,6 +38,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  auth_header:
+    dependency: transitive
+    description:
+      name: auth_header
+      sha256: "0a3938128b6124530de93ce1a20ccb58639195fe7952f638248ea1bc0e5408eb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -57,6 +70,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
+  checked_yaml:
+    dependency: transitive
+    description:
+      name: checked_yaml
+      sha256: feb6bed21949061731a7a75fc5d2aa727cf160b91af9a3e464c5e3a32e28b5ff
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.3"
   collection:
     dependency: transitive
     description:
@@ -69,66 +90,82 @@ packages:
     dependency: "direct main"
     description:
       name: conduit
-      sha256: ac21d1891d1bef4d4aab87a3307bc164f4a87005784441db798551ea7893421b
+      sha256: "9a96e6d6db6826cbd6c7048387c3d0fa2cceffdf9567160988b387e1be003cce"
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.12"
+    version: "5.0.3"
   conduit_codable:
     dependency: transitive
     description:
       name: conduit_codable
-      sha256: c55b72773eef321568ee0d4858d87079acb75555920f6f1beca480f45738320f
+      sha256: "5427ec6faeb03f8a5a9caebe6d33983e3f55ae4c4049ba6db9f15106df8c27e1"
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.11"
+    version: "5.0.3"
   conduit_common:
     dependency: transitive
     description:
       name: conduit_common
-      sha256: "421c95c7969bc16848d4e06d51b2f463ea6dbfa3af0da5cac734aaa9f3b2befd"
+      sha256: "20dc508245663b04dfd199fae3e62fdc75b47a0d92035c36347962b2f5b701d4"
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.11"
+    version: "5.0.3"
   conduit_config:
     dependency: transitive
     description:
       name: conduit_config
-      sha256: "360312cd46377b50df1058951a9766c8d4bc7f63d898ab8b32715ab41b261960"
+      sha256: bc300c0f156b1695df8be2a350c7df2cb2d52fa1e7163d127a84eb186fcc8189
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.11"
+    version: "5.0.3"
+  conduit_core:
+    dependency: "direct main"
+    description:
+      name: conduit_core
+      sha256: aee16162281e59536588d8a07d05318705f05282c2abb0be581d846d59a8d6fd
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.3"
   conduit_isolate_exec:
     dependency: transitive
     description:
       name: conduit_isolate_exec
-      sha256: "7fcee80af99918f1a59a4369a88a66495435f0286057c81d55c402e68435e530"
+      sha256: e3919466699155ae856fd71e91d6d193f4ac636959f11cb6a6522e3112ee009a
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.11"
+    version: "5.0.3"
   conduit_open_api:
     dependency: transitive
     description:
       name: conduit_open_api
-      sha256: ea90ed32aac55139a6609ac3dcf55db6a7c868eadc973ebe36e1477ab67f4da5
+      sha256: "01c1e2ec8c884ec1bf6857f8ee6f47cdbe3ae9e372bb385151d1bd130f67835a"
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.11"
+    version: "5.0.3"
   conduit_password_hash:
     dependency: transitive
     description:
       name: conduit_password_hash
-      sha256: f7231e42de6f93abecd4ab2449747872f645ff6afd16f4f89ab2dcb97abb1c9d
+      sha256: "8a11c091eabe4fe08da705509e95429ca88f383e6c899fbdbcf7ad30f6f32016"
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.11"
+    version: "5.0.3"
+  conduit_postgresql:
+    dependency: "direct main"
+    description:
+      name: conduit_postgresql
+      sha256: "0b2cadc614d5205d474d82d2e8a382cd6b3cbc70f987adb8b9179d3a3267dc1d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.0.3"
   conduit_runtime:
     dependency: transitive
     description:
       name: conduit_runtime
-      sha256: "701e011bd9bf0de8a24aac6718a8ccf7165ce3015a2bb29188d7ff613ba7bdde"
+      sha256: "401c3d695783756c027c727d2df82a7ebb977bf30f61ab96964079d561c79a2e"
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.11"
+    version: "5.0.3"
   convert:
     dependency: transitive
     description:
@@ -201,6 +238,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  jaguar_jwt:
+    dependency: "direct main"
+    description:
+      name: jaguar_jwt
+      sha256: c3ab24be5ba5f736f93eacfc94c4381bd93551a351ab5687e70c8d71a9916e8d
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   js:
     dependency: transitive
     description:
@@ -209,6 +254,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.1"
+  json_annotation:
+    dependency: transitive
+    description:
+      name: json_annotation
+      sha256: "1ce844379ca14835a50d2f019a3099f419082cfdd231cd86a142af94dd5c6bb1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.9.0"
   lints:
     dependency: "direct dev"
     description:
@@ -225,6 +278,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  macros:
+    dependency: transitive
+    description:
+      name: macros
+      sha256: "12e8a9842b5a7390de7a781ec63d793527582398d16ea26c60fed58833c9ae79"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0-main.0"
   matcher:
     dependency: transitive
     description:
@@ -293,18 +354,10 @@ packages:
     dependency: transitive
     description:
       name: postgres
-      sha256: f8e4f14734d096277f77ed5dddefcbc1ce18f8f7db5b7ff4b5dd6df2d9db2730
+      sha256: bd1df6d2f4ad71aef92dc59e867e3ba9ec22cf2212a81cf9d35aa061ce80b1ae
       url: "https://pub.dev"
     source: hosted
-    version: "2.6.4"
-  pub_cache:
-    dependency: transitive
-    description:
-      name: pub_cache
-      sha256: "6dda58dc069d153b7373977244ee6da4e6cb726c6e50903c1c4f278d0c111db5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.2"
+    version: "3.2.0"
   pub_semver:
     dependency: transitive
     description:
@@ -313,22 +366,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
-  pubspec:
+  pubspec_parse:
     dependency: transitive
     description:
-      name: pubspec
-      sha256: f534a50a2b4d48dc3bc0ec147c8bd7c304280fff23b153f3f11803c4d49d927e
+      name: pubspec_parse
+      sha256: c63b2876e58e194e4b0828fcb080ad0e06d051cb607a6be51a9e084f47cb9367
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.0"
-  quiver:
+    version: "1.2.3"
+  recase:
     dependency: transitive
     description:
-      name: quiver
-      sha256: b1c1ac5ce6688d77f65f3375a9abb9319b3cb32486bdc7a1e0fdf004d7ba4e47
+      name: recase
+      sha256: e4eb4ec2dcdee52dcf99cb4ceabaffc631d7424ee55e56f280bc039737f89213
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.1"
+    version: "4.1.0"
   sasl_scram:
     dependency: transitive
     description:
@@ -473,14 +526,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.2.0"
-  uri:
-    dependency: transitive
-    description:
-      name: uri
-      sha256: "889eea21e953187c6099802b7b4cf5219ba8f3518f604a1033064d45b1b8268a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   vm_service:
     dependency: transitive
     description:

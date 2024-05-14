@@ -1,6 +1,7 @@
 import 'dart:io';
 
-import 'package:conduit/conduit.dart';
+import 'package:conduit_core/conduit_core.dart';
+import 'package:conduit_postgresql/conduit_postgresql.dart';
 
 import 'controllers/auth_controller.dart';
 
