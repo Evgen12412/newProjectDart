@@ -1,4 +1,5 @@
 import 'package:auth_dart/models/response_model.dart';
+import 'package:auth_dart/models/user.dart';
 import 'package:conduit/conduit.dart';
 
 class AppAuthController extends ResourceController {
@@ -7,31 +8,56 @@ class AppAuthController extends ResourceController {
   AppAuthController(this.managedContext);
 
   @Operation.post()
-  Future<Response> signIn() async {
+  Future<Response> signIn(@Bind.body() User user) async {
+    if (user.password == null || user.username == null) {
+      return Response.badRequest(body: ResponseModel(
+        message: "Fields password and username is required"
+      ));
+    }
+
+    final User fetchedUser = User();
+
     return Response.ok(ResponseModel(
       data: {
-        "id":"1",
-        "refreshToken": "refreshToken",
-        "accessToken": "accessToken"
+        "id":fetchedUser.id,
+        "refreshToken": fetchedUser.refreshToken,
+        "accessToken": fetchedUser.accessToken
       },
-      message: "sign in ok"
+      message: "success authentication"
     ).toJson());
   }
 
   @Operation.put()
-  Future<Response> signUp() async {
+  Future<Response> signUp(@Bind.body() User user) async {
+    if (user.password == null || user.username == null || user.email == null) {
+      return Response.badRequest(body: ResponseModel(
+          message: "Fields password and username, email is required"
+      ));
+    }
+
+    final User fetchedUser = User();
+
     return Response.ok(ResponseModel(
         data: {
-          "id":"1",
-          "refreshToken": "refreshToken",
-          "accessToken": "accessToken"
+          "id":fetchedUser.id,
+          "refreshToken": fetchedUser.refreshToken,
+          "accessToken": fetchedUser.accessToken
         },
-        message: "sign up ok"
+        message: "success register"
     ).toJson());
   }
 
   @Operation.post("refresh")
-  Future<Response> refreshToken() async {
-    return Response.unauthorized(body: ResponseModel(error: "token is not valid").toJson());
+  Future<Response> refreshToken(@Bind.path("refresh") String refreshToken) async {
+    final User fetchedUser = User();
+
+    return Response.ok(ResponseModel(
+        data: {
+          "id":fetchedUser.id,
+          "refreshToken": fetchedUser.refreshToken,
+          "accessToken": fetchedUser.accessToken
+        },
+        message: "success update tokens"
+    ).toJson());
   }
 }
