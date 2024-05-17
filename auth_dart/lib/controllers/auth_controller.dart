@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:auth_dart/models/response_model.dart';
 import 'package:auth_dart/models/user.dart';
+import 'package:auth_dart/utils/app_response.dart';
 import 'package:auth_dart/utils/app_utils.dart';
 import 'package:conduit/conduit.dart';
 import 'package:conduit_core/conduit_core.dart';
@@ -37,19 +38,20 @@ class AppAuthController extends ResourceController {
       if (requestHashPassword == findUser.hashPassword) {
         await updateTokens(findUser.id ?? -1, managedContext);
         final newUser = await managedContext.fetchObjectWithID<User>(findUser.id);
-        return Response.ok(ResponseModelAuth(data: newUser?.backing.contents,
-        message: "success auth"));
+        return AppResponse.ok(body: newUser?.backing.contents,
+        message: "success auth");
       } else {
         throw QueryException.input("password not true", []);
       }
-    } on QueryException catch (error) {
-      return Response.serverError(body: ResponseModelAuth(message: error.message));
+    } catch (error) {
+      return AppResponse.serverError(error, message: "Error auth");
     }
   }
 
   @Operation.put()
   Future<Response> signUp(@Bind.body() User user) async {
     if (user.password == null || user.username == null || user.email == null) {
+      // todo create AppResponse for badRequest
       return Response.badRequest(body: ResponseModelAuth(
           message: "Fields password and username, email is required"
       ));
@@ -71,11 +73,11 @@ class AppAuthController extends ResourceController {
         await updateTokens(id, transaction);
       });
       final userData = await managedContext.fetchObjectWithID<User>(id);
-      return Response.ok(
-          ResponseModelAuth(data: userData?.backing.contents,
-          message: "success register"));
-    } on QueryException catch (error) {
-      return Response.serverError(body: ResponseModelAuth(message: error.message));
+      return AppResponse.ok(
+          body: userData?.backing.contents,
+          message: "success register");
+    }catch (error) {
+      return AppResponse.serverError(error, message: "Error register");
     }
 
   }
@@ -96,17 +98,18 @@ class AppAuthController extends ResourceController {
       final id = AppUtils.getIdFromToken(refreshToken);
       final user = await managedContext.fetchObjectWithID<User>(id);
       if (user?.refreshToken != refreshToken) {
-        return Response.unauthorized(body: ResponseModelAuth(message: "Invalid refresh token"))
+        // todo create AppResponse for unauthorized
+        return Response.unauthorized(body: ResponseModelAuth(message: "Invalid refresh token"));
       } else {
         await updateTokens(id, managedContext);
         final user = await managedContext.fetchObjectWithID<User>(id);
-        return Response.ok(ResponseModelAuth(data: user?.backing.contents,
-            message: "success update tokens"));
+        return AppResponse.ok(body: user?.backing.contents,
+            message: "success update tokens");
       }
 
 
-    } on QueryException catch (error) {
-      return Response.serverError(body: ResponseModelAuth(message: error.message));
+    } catch (error) {
+      return AppResponse.serverError(error, message: "Error  update tokens");
     }
   }
 
