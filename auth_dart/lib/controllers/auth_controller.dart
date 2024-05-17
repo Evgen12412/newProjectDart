@@ -99,7 +99,7 @@ class AppAuthController extends ResourceController {
         return Response.unauthorized(body: ResponseModelAuth(message: "Invalid refresh token"))
       } else {
         await updateTokens(id, managedContext);
-        final user = await managedContext.fetchObjectWithID(id);
+        final user = await managedContext.fetchObjectWithID<User>(id);
         return Response.ok(ResponseModelAuth(data: user?.backing.contents,
             message: "success update tokens"));
       }
