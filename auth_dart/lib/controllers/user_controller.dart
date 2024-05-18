@@ -1,4 +1,9 @@
+import 'dart:io';
+
+import 'package:auth_dart/models/user.dart';
+import 'package:auth_dart/utils/app_const.dart';
 import 'package:auth_dart/utils/app_response.dart';
+import 'package:auth_dart/utils/app_utils.dart';
 import 'package:conduit_core/conduit_core.dart';
 
 class UserController extends ResourceController {
@@ -7,11 +12,19 @@ class UserController extends ResourceController {
   UserController(this.managedContext);
 
   @Operation.get()
-  Future<Response> getProfile() async {
+  Future<Response> getProfile(
+  @Bind.header(HttpHeaders.authorizationHeader) String header) async {
     try {
-     return AppResponse.ok(message: "get profile");
+      final id = AppUtils.getIdFromHeader(header);
+      final user = await managedContext.fetchObjectWithID<User>(id);
+      user?.removePropertiesFromBackingMap(
+        [AppConst.accessToken, AppConst.refreshToken]
+      );
+     return AppResponse.ok(
+         message: "Success get profile",
+     body: user?.backing.contents);
     } catch (error) {
-     return AppResponse.serverError(error);
+     return AppResponse.serverError(error, message: "Error get profile");
     }
   }
 
