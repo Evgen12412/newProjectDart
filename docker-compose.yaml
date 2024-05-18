@@ -10,3 +10,8 @@ services:
     environment:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
+    volumes:
+      - db_auth_vol:/var/lib/postgresql/data
+
+volumes:
+  db_auth_vol: {}
