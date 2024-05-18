@@ -29,4 +29,8 @@ class AppResponse extends Response {
   AppResponse.ok({dynamic body, String? message}) : super.ok(
       ResponseModelAuth(data: body, message: message)
   );
+
+  AppResponse.badRequest({String? message}) : super.badRequest( body:
+      ResponseModelAuth( message: message??"Error query")
+  );
 }
