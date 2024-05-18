@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:auth_dart/controllers/token_controller.dart';
 import 'package:auth_dart/controllers/user_controller.dart';
+import 'package:auth_dart/utils/app_env.dart';
 import 'package:conduit_core/conduit_core.dart';
 import 'package:conduit_postgresql/conduit_postgresql.dart';
 
@@ -31,17 +32,13 @@ class AppService extends ApplicationChannel {
 
 
   PostgreSQLPersistentStore _initDatabase() {
-    final username = Platform.environment["DB_USERNAME"] ?? "root";
-    final password = Platform.environment["DB_PASSWORD"] ?? "root";
-    final host = Platform.environment["DB_HOST"] ?? "localhost";
-    final port = int.parse(Platform.environment["DB_PORT"] ?? "5433");
-    final databaseName = Platform.environment["DB_NAME"] ?? "postgres";
+
     return PostgreSQLPersistentStore(
-        username,
-        password,
-        host,
-        port,
-        databaseName
+       AppEnv.dbUsername,
+        AppEnv.dbPassword,
+        AppEnv.dbHost,
+        int.tryParse(AppEnv.dbPort),
+        AppEnv.dbDatabaseName
     );
   }
 }
