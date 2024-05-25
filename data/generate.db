@@ -1,3 +1,5 @@
 conduit db generate
 conduit db validate
 conduit db upgrade
+
+// в случае ошибок попробовать команду - dart pub global activate conduit
