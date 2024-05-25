@@ -38,7 +38,7 @@ services:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
     volumes:
-      - db_auth_vol:/var/lib/postgresql/data
+      - db_auth_vol:/var/lib/postgresql/data/
     networks:
       - internal_net
 
@@ -56,7 +56,7 @@ services:
       - POSTGRES_USER=root
       - POSTGRES_PASSWORD=root
     volumes:
-      - db_data_vol:/var/lib/postgresql/data
+      - db_data_vol:/var/lib/postgresql/data/
     networks:
       - internal_net
 
