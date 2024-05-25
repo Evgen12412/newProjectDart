@@ -14,41 +14,47 @@ class PostController extends ResourceController {
 
   @Operation.post()
   Future<Response> createPost(
-      @Bind.header(HttpHeaders.authorizationHeader) String header,
-      @Bind.body() Post post,
-      ) async {
+    @Bind.header(HttpHeaders.authorizationHeader) String header,
+    @Bind.body() Post post,
+  ) async {
     try {
       final id = AppUtils.getIdFromHeader(header);
       final author = await managedContext.fetchObjectWithID<Author>(id);
       if (author == null) {
-        final qCreateAuthor = Query<Author>(managedContext)
-            ..values.id = id;
+        final qCreateAuthor = Query<Author>(managedContext)..values.id = id;
         await qCreateAuthor.insert();
       }
       final qCreatePost = Query<Post>(managedContext)
-      ..values.author?.id = id
-      ..values.content = post.content;
+        ..values.author?.id = id
+        ..values.content = post.content;
       await qCreatePost.insert();
-      return AppResponse.ok(
-          message: "Success create posts");
+      return AppResponse.ok(message: "Success create posts");
     } catch (error) {
       return AppResponse.serverError(error, message: "Error create posts");
     }
   }
 
-  @Operation.get()
-  Future<Response> getPosts() async {
+  @Operation.get("id")
+  Future<Response> getPosts(
+    @Bind.header(HttpHeaders.authorizationHeader) String header,
+    @Bind.path("id") int id,
+  ) async {
     try {
-      // final id = AppUtils.getIdFromHeader(header);
-      // final user = await managedContext.fetchObjectWithID<User>(id);
-      // user?.removePropertiesFromBackingMap(
-      //   [AppConst.accessToken, AppConst.refreshToken]
-      // );
-     return AppResponse.ok(
-         message: "Success get posts");
+      final currentAuthorId = AppUtils.getIdFromHeader(header);
+      final post = await managedContext.fetchObjectWithID<Post>(id);
+
+      if (post == null) {
+        return AppResponse.ok(message: "Post not found");
+      }
+
+      if (post.author?.id != currentAuthorId) {
+        return AppResponse.ok(message: "Access denied");
+      }
+      post.backing.removeProperty("author");
+      return AppResponse.ok(
+          body: post.backing.contents, message: "Success get posts");
     } catch (error) {
-     return AppResponse.serverError(error, message: "Error get posts");
+      return AppResponse.serverError(error, message: "Error get posts");
     }
   }
-
 }
