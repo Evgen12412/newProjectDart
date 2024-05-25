@@ -14,7 +14,7 @@ class TokenController extends Controller {
     try {
       final key = AppEnv.secretKey;
       final header = request.raw.headers.value(HttpHeaders.authorizationHeader);
-      final token = AuthorizationBearerParser().parse(header);
+      final token = AuthorizationBearerParser().parse(header!);
       final jwtClaim = verifyJwtHS256Signature(token??"", key);
       jwtClaim.validate();
       return request;
