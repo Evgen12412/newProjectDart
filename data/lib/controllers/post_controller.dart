@@ -35,7 +35,7 @@ class PostController extends ResourceController {
   }
 
   @Operation.get("id")
-  Future<Response> getPosts(
+  Future<Response> getPost(
     @Bind.header(HttpHeaders.authorizationHeader) String header,
     @Bind.path("id") int id,
   ) async {
@@ -83,6 +83,23 @@ class PostController extends ResourceController {
            message: "Success delete post");
     } catch (error) {
       return AppResponse.serverError(error, message: "Error delete post");
+    }
+  }
+
+  @Operation.get()
+  Future<Response> getAllPosts(
+      @Bind.header(HttpHeaders.authorizationHeader) String header,
+      ) async {
+    try {
+      final id = AppUtils.getIdFromHeader(header);
+      final qGetPosts = Query<Post>(managedContext)
+      ..where((x) => x.author?.id).equalTo(id);
+      final List<Post> posts = await qGetPosts.fetch();
+      if (posts.isEmpty) return Response.notFound();
+
+      return Response.ok(posts);
+    } catch (error) {
+      return AppResponse.serverError(error, message: "Error get posts");
     }
   }
 }
